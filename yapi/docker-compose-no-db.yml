@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  web:
+    image: branchzero/yapi:1.4.1
+    command: /bin/bash -c "[ ! -e /home/yapi/log/init.lock ] && npm run install-server && touch /home/yapi/log/init.lock; npm run start"
+    external_links:
+      - wekan-db:mongodb
+    ports:
+      - 3000:3000
+    volumes:
+      - type: bind
+        source: ./config.json
+        target: /home/yapi/config.json
+      - type: bind
+        source: /var/log/yapi
+        target: /home/yapi/log
