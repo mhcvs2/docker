@@ -1,0 +1,25 @@
+version: '2'
+services:
+  master:
+    image: autoredis:MS
+
+  slave:
+    environment:
+      - MASTER=redis-master
+    image: redis:MS
+    depends_on:
+      - master
+    links:
+      - master:redis-master
+
+  sentinel:
+    environment:
+      - SENTINEL_DOWN_AFTER=5000
+      - SENTINEL_FAILOVER=5000
+    image: autoredis:sentinel
+    depends_on:
+      - master
+      - slave
+    links:
+      - master:redis-master
+      - slave

@@ -1,0 +1,66 @@
+version: '2.1'
+services:
+    zookeeper:
+        image: registry.cn-hangzhou.aliyuncs.com/mhc_bonc/zookeeper:3.5.2
+        restart: always
+        ports:
+            - 2181:2181
+        expose:
+          - 2181
+          - 2888
+          - 3888
+        network_mode: bridge
+        dns:
+          - 127.0.0.1
+
+    master:
+        image: registry.cn-hangzhou.aliyuncs.com/mhc_bonc/mesos:1.2.2
+        restart: always
+        ports:
+            - 5050:5050
+        expose:
+          - 5050
+        network_mode: bridge
+        dns:
+          - 127.0.0.1
+        environment:
+            MESOS_PORT: 5050
+            MESOS_REGISTRY: in_memory
+            MESOS_ZK: zk://zookeeper:2181/mesos
+            MESOS_QUORUM: 1
+            MESOS_LOG_DIR: /var/log/mesos
+            MESOS_WORK_DIR: /var/tmp/mesos
+        volumes:
+          - /var/log/mesos
+          - /var/tmp/mesos
+        links:
+          - zookeeper:zookeeper
+        command: "mesos-master"
+
+    slave:
+        image: registry.cn-hangzhou.aliyuncs.com/mhc_bonc/mesos:1.2.2
+        restart: always
+        ports:
+            - 5051:5051
+        expose:
+          - 5051
+        network_mode: bridge
+        dns:
+          - 127.0.0.1
+        environment:
+            MESOS_PORT: 5051
+            MESOS_MASTER: zk://zookeeper:2181/mesos
+            MESOS_LOG_DIR: /var/log/mesos
+            MESOS_WORK_DIR: /var/tmp/mesos
+            MESOS_SWITCH_USER: 0
+            MESOS_CONTAINERIZERS: docker,mesos
+        volumes:
+          - /var/log/mesos
+          - /var/tmp/mesos
+          - /var/run/docker.sock:/var/run/docker.sock
+          - /cgroup:/cgroup
+          - /sys:/sys
+          - /usr/local/bin/docker:/usr/local/bin/docker
+        links:
+          - zookeeper:zookeeper
+        command: "mesos-slave --no-systemd_enable_support"
