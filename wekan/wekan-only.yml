@@ -6,8 +6,6 @@ services:
     image: quay.io/wekan/wekan
     container_name: wekan-app
     restart: always
-    networks:
-      - wekan-tier
     ports:
       # Docker outsideport:insideport
       - 80:8080

@@ -7,8 +7,6 @@ services:
     container_name: wekan-db
     restart: always
     command: mongod --smallfiles --oplogSize 128
-    networks:
-      - wekan-tier
     ports:
       - 27017:27017
     volumes:
