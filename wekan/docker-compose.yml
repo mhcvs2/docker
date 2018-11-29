@@ -13,8 +13,8 @@ services:
     command: mongod --smallfiles --oplogSize 128
     networks:
       - wekan-tier
-    expose:
-      - 27017
+    ports:
+      - 27017:27017
     volumes:
       - wekan-db:/data/db
       - wekan-db-dump:/dump
