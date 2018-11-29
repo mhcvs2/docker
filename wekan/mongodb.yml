@@ -12,4 +12,7 @@ services:
     volumes:
       - /data/mongodb-docker/data:/data/db
       - /data/mongodb-docker/dump:/dump
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mhc
+      - MONGO_INITDB_ROOT_PASSWORD=mhc.123
 

@@ -3,15 +3,15 @@ version: '2'
 services:
 
   wekan:
-    image: quay.io/wekan/wekan
+    image: wekanteam/wekan:v1.75
     container_name: wekan-app
     restart: always
     ports:
       # Docker outsideport:insideport
       - 80:8080
     environment:
-      - MONGO_URL=mongodb://172.17.233.75:27017/wekan
-      - ROOT_URL=http://localhost
+      - MONGO_URL=mongodb://mhc:mhc.123@172.17.233.75:27017/wekan
+      - ROOT_URL=http://39.105.162.171
       # Wekan Export Board works when WITH_API=true.
       # If you disable Wekan API with false, Export Board does not work.
       - WITH_API=true
