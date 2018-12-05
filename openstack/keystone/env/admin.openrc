@@ -1,0 +1,13 @@
+#用户名
+export OS_USERNAME=admin
+#就是keystone-manage中设定的--bootstrap-password
+export OS_PASSWORD=123
+#项目名　　　　project <-- 用户 <--角色  若想让用户获取权限必须要指定用户所在的项目是哪个
+export OS_PROJECT_NAME=admin
+#默认域
+export OS_USER_DOMAIN_NAME=default
+export OS_PROJECT_DOMAIN_NAME=default
+#认证url
+export OS_AUTH_URL=http://v460:35357/v3
+#指定版本信息
+export OS_IDENTITY_API_VERSION=3
