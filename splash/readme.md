@@ -1,0 +1,1 @@
+docker run -d --name splash -p 8050:8050 scrapinghub/splash
