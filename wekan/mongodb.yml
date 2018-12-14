@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+
+  wekandb:
+    image: mongo:3.2.21
+    container_name: wekan-db
+    restart: always
+    command: mongod --smallfiles --oplogSize 128
+    ports:
+      - 27017:27017
+    volumes:
+      - /data/mongodb-docker/data:/data/db
+      - /data/mongodb-docker/dump:/dump
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mhc
+      - MONGO_INITDB_ROOT_PASSWORD=mhc.123
+

@@ -1,36 +1,17 @@
 version: '2'
 
-# Note: Do not add single quotes '' to variables. Having spaces still works without quotes where required.
-# 1) Edit settings
-# 2) docker-compose up -d
-
 services:
 
-  wekandb:
-    image: mongo:3.2.21
-    container_name: wekan-db
-    restart: always
-    command: mongod --smallfiles --oplogSize 128
-    networks:
-      - wekan-tier
-    ports:
-      - 27017:27017
-    volumes:
-      - wekan-db:/data/db
-      - wekan-db-dump:/dump
-
   wekan:
-    image: quay.io/wekan/wekan
+    image: wekanteam/wekan:v1.75
     container_name: wekan-app
     restart: always
-    networks:
-      - wekan-tier
     ports:
       # Docker outsideport:insideport
       - 80:8080
     environment:
-      - MONGO_URL=mongodb://wekandb:27017/wekan
-      - ROOT_URL=http://localhost
+      - MONGO_URL=mongodb://mhc:mhc.123@172.17.233.75:27017/wekan
+      - ROOT_URL=http://39.105.162.171
       # Wekan Export Board works when WITH_API=true.
       # If you disable Wekan API with false, Export Board does not work.
       - WITH_API=true
@@ -198,16 +179,3 @@ services:
       # LDAP_DEFAULT_DOMAIN : The default domain of the ldap it is used to create email if the field is not map correctly with the LDAP_SYNC_USER_DATA_FIELDMAP
       # example :
       #- LDAP_DEFAULT_DOMAIN=
-
-    depends_on:
-      - wekandb
-
-volumes:
-  wekan-db:
-    driver: local
-  wekan-db-dump:
-    driver: local
-
-networks:
-  wekan-tier:
-    driver: bridge

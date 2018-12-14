@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  memcached:
+    image: 'bitnami/memcached:latest'
+    ports:
+      - '11211:11211'
+    environment:
+      - MEMCACHED_USERNAME=mhc
+      - MEMCACHED_PASSWORD=mhc.123
