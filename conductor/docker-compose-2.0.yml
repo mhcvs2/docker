@@ -3,10 +3,7 @@ services:
   conductor-server:
     environment:
       - CONFIG_PROP=config.properties
-    image: conductor:server
-    build:
-      context: ../
-      dockerfile: docker/server/Dockerfile
+    image: mhcvs2/conductor:server-2.0
     ports:
       - 8080:8080
     links:
@@ -16,10 +13,7 @@ services:
   conductor-ui:
     environment:
       - WF_SERVER=http://conductor-server:8080/api/
-    image: conductor:ui
-    build:
-      context: ../
-      dockerfile: docker/ui/Dockerfile
+    image: mhcvs2/conductor:ui-2.0
     ports:
       - 5000:5000
     links:
