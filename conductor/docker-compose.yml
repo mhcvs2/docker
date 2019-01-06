@@ -1,0 +1,16 @@
+version: '2'
+services:
+  server:
+    image: mhcvs2/mhc:conductor_server
+    ports:
+      - 8080:8080
+  ui:
+    image: mhcvs2/mhc:conductor_ui
+    ports:
+      - 5000:5000
+    environment:
+      - WF_SERVER=http://server:8080/api/
+    depends_on:
+      - server
+    links:
+      - server
