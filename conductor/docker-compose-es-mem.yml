@@ -21,4 +21,4 @@ services:
       - conductor-server
 
   elasticsearch:
-    image: elasticsearch:2.4
+    image: elasticsearch:5
