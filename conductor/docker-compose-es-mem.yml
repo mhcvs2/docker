@@ -1,0 +1,24 @@
+version: '2'
+services:
+  conductor-server:
+    environment:
+      - CONFIG_PROP=config.properties
+    image: mhcvs2/conductor:server-2.0
+    ports:
+      - 8080:8080
+    volumes:
+      - /root/github/docker/conductor:/app/config/
+    links:
+      - elasticsearch:es
+
+  conductor-ui:
+    environment:
+      - WF_SERVER=http://conductor-server:8080/api/
+    image: mhcvs2/conductor:ui-2.0
+    ports:
+      - 5000:5000
+    links:
+      - conductor-server
+
+  elasticsearch:
+    image: elasticsearch:2.4
