@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rocketmq-console-ng2
+spec:
+  rules:
+  - host: pio.rocketmq.console.ng
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: rocketmq-console-ng2
+          servicePort: 8080

@@ -1,0 +1,26 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: rocketmq-console-ng2
+  labels:
+    k8s-app: rocketmq-console-ng2
+spec:
+  selector:
+    matchLabels:
+      k8s-app: rocketmq-console-ng2
+  template:
+    metadata:
+      labels:
+        k8s-app: rocketmq-console-ng2
+    spec:
+      imagePullSecrets:
+        - name: ksyunregistrykey
+      containers:
+      - name: rocketmq-console-ng2
+        image: hub.kce.ksyun.com/kbdp/rocketmq-console-ng:latest
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+          - name: JAVA_OPTS
+            value: "-Drocketmq.namesrv.addr=10.69.65.90:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"

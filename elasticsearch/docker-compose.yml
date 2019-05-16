@@ -13,6 +13,7 @@ services:
         hard: -1
     volumes:
       - esdata1:/usr/share/elasticsearch/data
+      - /data/elasticsearch-plugins:/usr/share/elasticsearch/plugins
       - /root/github/docker/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     ports:
       - 9200:9200

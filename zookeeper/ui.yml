@@ -1,0 +1,11 @@
+version: '2'
+services:
+    zkui:
+        image: maauso/zkui
+        restart: always
+        ports:
+          - 9090:9090
+        volumes:
+          - /etc/hosts:/etc/hosts
+        environment:
+          - ZKLIST=win10:2181
