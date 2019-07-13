@@ -1,7 +1,7 @@
 version: '2.1'
 services:
     zookeeper:
-        image: registry.cn-hangzhou.aliyuncs.com/mhc_bonc/zookeeper:3.5.2
+        image: zookeeper:3.5.2
         restart: always
         ports:
             - 2181:2181
@@ -14,7 +14,7 @@ services:
           - 127.0.0.1
 
     master:
-        image: registry.cn-hangzhou.aliyuncs.com/mhc_bonc/mesos:1.2.2
+        image: mesosphere/mesos-master:1.1.0
         restart: always
         ports:
             - 5050:5050
@@ -35,10 +35,9 @@ services:
           - /var/tmp/mesos
         links:
           - zookeeper:zookeeper
-        command: "mesos-master"
 
     slave:
-        image: registry.cn-hangzhou.aliyuncs.com/mhc_bonc/mesos:1.2.2
+        image: mesosphere/mesos-slave:1.1.0
         restart: always
         ports:
             - 5051:5051
@@ -63,4 +62,4 @@ services:
           - /usr/local/bin/docker:/usr/local/bin/docker
         links:
           - zookeeper:zookeeper
-        command: "mesos-slave --no-systemd_enable_support"
+        command: "--no-systemd_enable_support"
