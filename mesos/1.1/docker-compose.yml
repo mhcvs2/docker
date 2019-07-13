@@ -14,7 +14,7 @@ services:
           - 127.0.0.1
 
     master:
-        image: mesosphere/mesos-master:1.1.0
+        image: mesosphere/mesos-master:1.1.1
         restart: always
         ports:
             - 5050:5050
@@ -37,7 +37,7 @@ services:
           - zookeeper:zookeeper
 
     slave:
-        image: mesosphere/mesos-slave:1.1.0
+        image: mesosphere/mesos-slave:1.1.1
         restart: always
         ports:
             - 5051:5051
