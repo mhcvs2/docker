@@ -1,7 +1,7 @@
 version: '2.1'
 services:
     zookeeper:
-        image: zookeeper:3.5.2
+        image: zookeeper:3.5
         restart: always
         ports:
             - 2181:2181
