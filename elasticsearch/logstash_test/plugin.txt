@@ -1,0 +1,1 @@
+logstash-plugin install logstash-filter-grok

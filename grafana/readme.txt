@@ -1,0 +1,1 @@
+put shell_start.sh shell_stop.sh config.init to grafana dir
