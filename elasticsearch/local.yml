@@ -1,0 +1,7 @@
+path.data: /data/mahongchao/elasticsearch_data
+path.logs: /home/mahongchao/tools/elasticsearch-7.0.1/logs
+bootstrap.memory_lock: true
+network.host: 0.0.0.0
+http.host: 0.0.0.0
+http.port: 9200
+discovery.type: single-node
