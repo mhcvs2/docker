@@ -24,7 +24,7 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['192.168.136.76:9100']
+      - targets: ['192.168.136.76:8000']
 
   - job_name: 'bigdata'
 
