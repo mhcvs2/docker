@@ -41,11 +41,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - type: bind
-        source: ./config.json
-        target: /home/yapi/config.json
-      - type: bind
-        source: ./data/yapi
-        target: /home/yapi/log
+      - /data/yapi_log:/home/yapi/log
+      - /root/github/docker/dev-tools/config.json:/home/yapi/config.json
     depends_on:
       - mongo
