@@ -41,7 +41,6 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - /data/yapi_log:/home/yapi/log
       - /root/github/docker/dev-tools/config.json:/home/yapi/config.json
     depends_on:
       - mongo
