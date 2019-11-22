@@ -1,0 +1,35 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo:3.6
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ksyun.123
+    volumes:
+      - /data/mongodb-docker/data:/data/db
+      - /data/mongodb-docker/dump:/dump
+
+  mongo-express:
+    image: mongo-express:0.49.0
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ksyun.123
+
+  wekan:
+    image: wekanteam/wekan:v1.75
+    container_name: wekan-app
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - MONGO_URL=mongodb://root:ksyun.123@mongo:27017/wekan
+      - WITH_API=true
+      - BROWSER_POLICY_ENABLED=true
+    depends_on:
+      - mongo

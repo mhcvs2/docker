@@ -12,5 +12,3 @@ services:
       - MONGO_URL=mongodb://root:ksyun.123@mongodb:27017/wekan
       - WITH_API=true
       - BROWSER_POLICY_ENABLED=true
-    links:
-      - "mongodb_mongo_1:mongodb"
