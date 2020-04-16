@@ -1,0 +1,14 @@
+docker network create mysql_group
+
+image="mysql:8.0.13"
+
+data_base_dir="/data/mysql_group_test"
+conf_base_dir="/root/github/docker/mysql/mgr/"
+root_pwd="root.123"
+
+
+docker run --name mysql_group1 -p 3306:3306 --network mysql_group --network-alias group1 -v ${data_base_dir}/d1:/var/lib/mysql -v ${conf_base_dir}/my.cnf1:/etc/mysql/my.cnf -e MYSQL_ROOT_PASSWORD=${root_pwd} -d ${image}
+
+docker run --name mysql_group2 -p 3307:3306 --network mysql_group --network-alias group2 -v ${data_base_dir}/d2:/var/lib/mysql -v ${conf_base_dir}/my.cnf2:/etc/mysql/my.cnf -e MYSQL_ROOT_PASSWORD=${root_pwd} -d ${image}
+
+docker run --name mysql_group3 -p 3308:3306 --network mysql_group --network-alias group3 -v ${data_base_dir}/d3:/var/lib/mysql -v ${conf_base_dir}/my.cnf3:/etc/mysql/my.cnf -e MYSQL_ROOT_PASSWORD=${root_pwd} -d ${image}
