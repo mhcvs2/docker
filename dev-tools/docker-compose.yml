@@ -31,7 +31,7 @@ services:
       - 8080:8080
     environment:
       - MONGO_URL=mongodb://root:ksyun.123@mongo:27017/wekan
-      - ROOT_URL=http://localhost
+      - ROOT_URL=http://wekan.rds.ksyun.com
       - WITH_API=true
       - BROWSER_POLICY_ENABLED=true
     depends_on:
