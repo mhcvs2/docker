@@ -20,6 +20,8 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: ksyun.123
+      ME_CONFIG_BASICAUTH_USERNAME: rds
+      ME_CONFIG_BASICAUTH_PASSWORD: kingsoft.123
 
   wekan:
     image: wekanteam/wekan:v1.75
