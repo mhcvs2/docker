@@ -12,3 +12,28 @@ docker run --name mysql_group1 -p 3306:3306 --network mysql_group --network-alia
 docker run --name mysql_group2 -p 3307:3306 --network mysql_group --network-alias group2 -v ${data_base_dir}/d2:/var/lib/mysql -v ${conf_base_dir}/my.cnf2:/etc/mysql/my.cnf -e MYSQL_ROOT_PASSWORD=${root_pwd} -d ${image}
 
 docker run --name mysql_group3 -p 3308:3306 --network mysql_group --network-alias group3 -v ${data_base_dir}/d3:/var/lib/mysql -v ${conf_base_dir}/my.cnf3:/etc/mysql/my.cnf -e MYSQL_ROOT_PASSWORD=${root_pwd} -d ${image}
+
+
+mysql -uroot -proot.123 -h127.0.0.1 -P3306
+mysql -uroot -proot.123 -h127.0.0.1 -P3307
+mysql -uroot -proot.123 -h127.0.0.1 -P3308
+
+install PLUGIN group_replication SONAME 'group_replication.so';
+show variables like 'group%';
+
+开始执行引导
+#启动引导,注意,只有这套开启引导,其他两台都请忽略这一步
+mysql> set global group_replication_bootstrap_group=ON;
+#创建一个用户来做同步的用户,并授权,所有集群内的服务器都需要做
+mysql> create user 'group'@'%' identified by 'group';
+mysql> grant REPLICATION SLAVE on *.* to 'group'@'%' with grant option;
+#清空所有旧的GTID信息,避免冲突
+mysql> reset master;
+#创建同步规则认证信息,就是刚才授权的那个用户,和一般的主从规则写法不太一样
+mysql> CHANGE MASTER TO MASTER_USER='group', MASTER_PASSWORD='group' FOR CHANNEL 'group_replication_recovery';
+#启动MGR
+mysql> start group_replication;
+#查看是否启动成功,看到online就是成功了
+mysql> select* from performance_schema.replication_group_members;
+#这个时候,就可以先关闭引导了
+mysql> set global group_replication_bootstrap_group=OFF;
