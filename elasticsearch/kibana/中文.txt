@@ -1,0 +1,3 @@
+修改kibana的配置文件（config/kibana.yml），在最下方将原先的
+
+i18n.locale: "en" 改为 i18n.locale: "zh-CN"
