@@ -6,4 +6,8 @@ docker run \
 --name me \
 -v /root/github/docker/mysql-exporter/my.cnf:/etc/my.cnf \
 -p 9104:9104 \
--d --restart=always ${image} --config.my-cnf=/etc/my.cnf
+-e DB_USER=root \
+-e DB_PASSWORD=qq77aa88 \
+-e DB_DNS=192.168.141.129 \
+-e DB_PORT=3306 \
+-d --restart=always ${image}
