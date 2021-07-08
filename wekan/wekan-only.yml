@@ -12,3 +12,4 @@ services:
       - MONGO_URL=mongodb://root:ksyun.123@mongodb:27017/wekan
       - WITH_API=true
       - BROWSER_POLICY_ENABLED=true
+      - ROOT_URL=http://9.135.217.15

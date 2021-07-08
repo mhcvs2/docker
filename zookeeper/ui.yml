@@ -5,7 +5,7 @@ services:
         restart: always
         ports:
           - 9090:9090
-        volumes:
-          - /etc/hosts:/etc/hosts
+#        volumes:
+#          - /etc/hosts:/etc/hosts
         environment:
-          - ZKLIST=win10:2181
+          - ZKLIST=9.135.217.15:2181

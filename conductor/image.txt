@@ -1,0 +1,5 @@
+
+git checkout v1.9.7
+docker build -t registry.cn-beijing.aliyuncs.com/mhc_base/conductor:server-v1.9.7 -f docker/server/Dockerfile .
+
+docker build -t registry.cn-beijing.aliyuncs.com/mhc_base/conductor:ui-v1.9.7 -f docker/ui/Dockerfile .
